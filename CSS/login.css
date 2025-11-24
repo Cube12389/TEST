@@ -1,0 +1,85 @@
+
+.login {
+    position: absolute;
+    left: 50%;
+    top: 50px;
+    transform: translate(-50%, 0%);
+    width: 90%;
+    height: 450px;
+    max-width: 315px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    margin: 10px;
+}
+
+.login h3 {
+    top: 20px;
+    text-align: center;
+}
+
+.login p {
+    position: relative;
+    left: 5%;
+    top: 5px;
+}
+
+.login a {
+    position: relative;
+    left: 5%;
+    top: 5px;
+}
+
+.login input {
+    position: relative;
+    left: 5%;
+    width: 90%;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.login button {
+    position: relative;
+    left: 5%;
+    width: 93%;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(0, 119, 255);
+    color: rgb(255, 255, 255);
+    top: 10px;
+}
+
+.login button:hover {
+    background-color: rgb(50, 150, 255);
+}
+
+.text {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tell { display: none; }
+
+@media only screen and (min-width: 768px) {
+    .login {
+        transform: translate(0%, 0%) !important;
+        left: calc(50% + 50px);
+    }
+    .tell {
+        position: absolute;
+        right: calc(50% - 40px);
+        top: 50px;
+        width: 400px;
+        height: 450px;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+        display: block !important;
+        margin: 10px;
+    }
+}

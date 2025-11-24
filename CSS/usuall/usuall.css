@@ -1,0 +1,43 @@
+
+
+main .content {
+    position: relative;
+    width: 90%;
+    max-width: 910px;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px auto;
+}
+
+main .content .cnt {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px;
+    box-sizing: border-box;
+}
+
+main .content .all {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+@media only screen and (min-width: 1000px) {
+    main .content {
+        width: 910px;
+        margin: 10px auto;
+    }
+
+    main .content .cnt {
+        width: calc(50% - 20px);
+    }
+}
