@@ -28,13 +28,13 @@ $LoginHTML = 0;
         <input type="password" id="password" placeholder="请输入密码">
         <p>确认密码</p>
         <input type="password" id="password2" placeholder="确认密码"><br><br>
-        <button onclick="reslogin();">注册</button><br><br>
+        <button onclick="First();">注册</button><br><br>
     </div>
     <div style="height: auto; display: none" class="login" id="reslogin-1">
         <h3>验证邮箱验证码</h3>
         <p>邮箱: <span id="EmailP"></span></p>
         <input type="text" id="EN" placeholder="请输入验证码">
-        <button onclick="reslogin();">注册</button><br><br>
+        <button onclick="Second();">注册</button><br><br>
     </div>
     <div style="height: auto; display: none" class="login" id="reslogin-erroy">
         <h3 id="erroy"></h3>

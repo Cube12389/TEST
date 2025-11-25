@@ -1,13 +1,13 @@
 
 
 // 全局变量，用于存储当前用户的验证会话信息
-let currentUserToken = '';
-let currentUserEmail = '';
+let UserToken = '';
+let UserEmail = '';
 
 document.getElementById('tell').style.height = document.getElementById('reslogin').offsetHeight + 'px';
 
 // 调整提示框高度函数
-function adjustTellHeight() {
+function ATH() {
     const loginElements = ['reslogin', 'reslogin-1', 'reslogin-erroy'];
     for (const elementId of loginElements) {
         const element = document.getElementById(elementId);
@@ -22,9 +22,9 @@ function res() {
     document.getElementById('reslogin-erroy').style.display = 'none';
     document.getElementById('reslogin-1').style.display = 'none';
     document.getElementById('reslogin').style.display = 'block';
-    currentUserToken = '';
-    currentUserEmail = '';
-    adjustTellHeight();
+    UserToken = '';
+    UserEmail = '';
+    ATH();  
 }
 
 // 显示错误页面
@@ -37,7 +37,7 @@ function TellErroy(n) {
 }
 
 // 第一步骤：提交注册信息并获取验证码
-function submitRegistrationInfo() {
+function First() {
     const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
@@ -81,19 +81,19 @@ function submitRegistrationInfo() {
                 const response = JSON.parse(this.responseText);
                 if (response.status === '200') {
                     // 保存token和邮箱
-                    currentUserToken = response.token;
-                    currentUserEmail = response.email;
+                    UserToken = response.token;
+                    UserEmail = response.email;
                     
                     // 显示验证码输入页面
                     document.getElementById('reslogin').style.display = 'none';
                     document.getElementById('reslogin-1').style.display = 'block';
-                    document.getElementById('EmailP').textContent = currentUserEmail;
-                    adjustTellHeight();
+                    document.getElementById('EmailP').textContent = UserEmail;
+                    ATH();
                 }
             } catch (e) {
                 // 如果不是JSON，处理错误码
                 const errorCode = this.responseText;
-                handleErrorCode(errorCode);
+                PE(errorCode);
             }
         }
     };
@@ -104,7 +104,7 @@ function submitRegistrationInfo() {
 }
 
 // 第二步骤：提交验证码完成注册
-function submitVerificationCode() {
+function Second() {
     const code = document.getElementById('EN').value;
     
     if (code == "") {
@@ -112,7 +112,7 @@ function submitVerificationCode() {
         return;
     }
     
-    if (currentUserToken == "") {
+    if (UserToken == "") {
         TellErroy("验证会话已过期，请重新注册");
         return;
     }
@@ -128,18 +128,18 @@ function submitVerificationCode() {
                 alert("注册成功！即将跳转到登录页面");
                 window.location.href = "login.php";
             } else {
-                handleErrorCode(response);
+                PE(response);
             }
         }
     };
     
     xhttp.open("POST", "../php/reslogin_php.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("verification_code=" + encodeURIComponent(code) + "&token=" + encodeURIComponent(currentUserToken));
+    xhttp.send("code=" + encodeURIComponent(code) + "&token=" + encodeURIComponent(UserToken));
 }
 
 // 处理错误码
-function handleErrorCode(code) {
+function PE(code) {
     switch(code) {
         case "301":
             TellErroy("这些信息不能为空");
@@ -182,15 +182,5 @@ function handleErrorCode(code) {
             break;
         default:
             TellErroy("未知错误，请稍后重试");
-    }
-}
-
-// 主函数，根据当前页面状态决定执行哪个步骤
-function reslogin() {
-    // 检查当前是注册页面还是验证码页面
-    if (document.getElementById('reslogin').style.display === 'block') {
-        submitRegistrationInfo();
-    } else if (document.getElementById('reslogin-1').style.display === 'block') {
-        submitVerificationCode();
     }
 }

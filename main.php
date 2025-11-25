@@ -1,13 +1,18 @@
 <?php
+require_once 'php/usuall/mySQLtools.php';
 
 $LoginHTML = 1;
 
 $servername = "localhost";
-$username = "urse";
-$password = "lOb1sccJLEToPDDW";
+$dbUsername = "Urse";
+$dbPassword = "lOb1sccJLEToPDDW";
 $dbname = "infrom";
 
-$conninfrom = new mysqli($servername, $username, $password, $dbname);
+$db = new myConn();
+$CR = $db->connect($servername, $dbUsername, $dbPassword, $dbname);
+if ($CR['status'] === false) {  
+    die("<script>alert('连接失败，请刷新页面重试'); window.location.href ='../index.php';</script>");
+}
 
 ?>
 
@@ -38,8 +43,8 @@ $conninfrom = new mysqli($servername, $username, $password, $dbname);
     <div class="cnt" style="background-color: white; ">
         <h3 style="text-align: center;">课程表</h3>
         <?php
-            $sql = "SELECT * FROM `classtable`";
-            $result = $conninfrom->query($sql);
+            $users = $db->select('');
+            
         ?>
     </div>
 </div>

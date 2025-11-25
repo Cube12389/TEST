@@ -7,7 +7,7 @@ $name = $_POST["name"] ?? '';
 $email = $_POST["email"] ?? '';
 $password = $_POST["password"] ?? '';
 $password2 = $_POST["password2"] ?? '';
-$verificationCode = $_POST["verification_code"] ?? '';
+$VCode = $_POST["code"] ?? '';
 
 // 数据库配置
 $servername = "localhost";
@@ -16,7 +16,7 @@ $dbPassword = "lOb1sccJLEToPDDW";
 $dbname = "urse";
 
 // 生成随机验证码
-function generateVerificationCode($length = 6) {
+function getCode($length = 6) {
     $digits = '0123456789';
     $code = '';
     for ($i = 0; $i < $length; $i++) {
@@ -26,7 +26,7 @@ function generateVerificationCode($length = 6) {
 }
 
 // 生成随机token
-function generateToken($length = 32) {
+function getToken($length = 32) {
     return bin2hex(random_bytes($length / 2));
 }
 
@@ -47,7 +47,7 @@ function sendVerificationEmail($to, $code) {
         $mail->Port = 587;
         
         // 收件人设置
-        $mail->setFrom($email, '网站注册验证');
+        $mail->setFrom('m13160816175@163.com', '网站注册验证');
         $mail->addAddress($to);
         
         // 邮件内容
@@ -67,14 +67,57 @@ function sendVerificationEmail($to, $code) {
 
 // 初始化数据库连接
 $db = new myConn();
-$connectResult = $db->connect($servername, $dbUsername, $dbPassword, $dbname);
+$CR = $db->connect($servername, $dbUsername, $dbPassword, $dbname);
 
-if ($connectResult['status'] === false) {
+if ($CR['status'] === false) {  
     die("<script>alert('数据库连接失败，请刷新页面重试'); window.location.href ='../index.php';</script>");
 }
 
+function getUID() {
+    global $db;
+    $result = $db->select('urselogin', [
+        'fields' => 'MAX(UID) as max_uid',
+        'limit' => 1
+    ]);
+    if (!$result['status']) {
+        error_log("查询最大UID失败: " . $result['errorMsg']);
+        return time() + rand(1000, 9999);
+    }
+    
+    // 获取最大UID，如果没有记录则默认为0
+    $maxUid = isset($result['data'][0]['max_uid']) && !empty($result['data'][0]['max_uid']) ? $result['data'][0]['max_uid'] : 0;
+    
+    // 生成新的UID（最大UID + 1）
+    $newUid = $maxUid + 1;
+    
+    // 检查新生成的UID是否已存在（防止并发情况下的冲突）
+    $checkResult = $db->select('urselogin', [
+        'where' => ['UID' => $newUid],
+        'limit' => 1
+    ]);
+    
+    // 如果新生成的UID已存在，使用递归获取一个未使用的UID
+    if ($checkResult['status'] && $checkResult['count'] > 0) {
+        // 为避免潜在的无限递归，设置最大重试次数
+        static $attempts = 0;
+        $attempts++;
+        
+        if ($attempts > 10) {
+            // 达到最大重试次数后，使用时间戳+随机数作为备用方案
+            error_log("达到最大UID获取重试次数，使用备用方案");
+            return time() + rand(10000, 99999);
+        }
+        
+        // 递归调用获取新的UID
+        return getUID();
+    }
+    
+    // 返回新生成的未被使用的UID
+    return $newUid;
+}
+
 // 验证请求类型
-if (empty($verificationCode)) {
+if ($VCode == '') {
     // 第一步：验证用户输入并发送验证码
     // 验证输入
     if (empty($name) || empty($email) || empty($password) || empty($password2)) {
@@ -130,27 +173,27 @@ if (empty($verificationCode)) {
     }
     
     // 生成验证码
-    $code = generateVerificationCode();
-    $token = generateToken();
+    $code = getCode();
+    $token = getToken();
     $expireTime = date('Y-m-d H:i:s', strtotime('+15 minutes'));
     
     // 哈希密码
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $Password = password_hash($password, PASSWORD_DEFAULT);
     
     // 开始事务
-    $transactionResult = $db->beginTransaction();
-    if (!$transactionResult['status']) {
+    $TR = $db->beginTransaction();
+    if (!$TR['status']) {
         echo "500";
         $db->close();
         return;
     }
     
     // 存储预注册信息
-    $preRegisterData = [
+    $preData = [
         'Name' => $name,
-        'Password' => $hashedPassword,
+        'Password' => $Password,
         'Email' => $email,
-        'VerificationCode' => $code,
+        'Code' => $code,
         'Token' => $token,
         'ExpireTime' => $expireTime,
         'CreatedAt' => date('Y-m-d H:i:s')
@@ -160,7 +203,7 @@ if (empty($verificationCode)) {
     $db->delete('preregister', ['Email' => $email]);
     
     // 插入新的预注册记录
-    $insertResult = $db->insert('preregister', $preRegisterData);
+    $insertResult = $db->insert('preregister', $preData);
     
     if (!$insertResult['status']) {
         $db->rollback();
@@ -212,15 +255,15 @@ if (empty($verificationCode)) {
     }
     
     // 验证验证码
-    if ($userData['VerificationCode'] !== $verificationCode) {
+    if ($userData['Code'] !== $VCode) {
         echo "405";
         $db->close();
         return;
     }
     
     // 开始事务
-    $transactionResult = $db->beginTransaction();
-    if (!$transactionResult['status']) {
+    $TR = $db->beginTransaction();
+    if (!$TR['status']) {
         echo "500";
         $db->close();
         return;
@@ -228,11 +271,10 @@ if (empty($verificationCode)) {
     
     // 插入正式用户记录
     $userRecord = [
+        'UID' => getUID(),
         'Name' => $userData['Name'],
         'Password' => $userData['Password'],
         'Email' => $userData['Email'],
-        'CreatedAt' => date('Y-m-d H:i:s'),
-        'Status' => 1 // 已验证
     ];
     
     $insertResult = $db->insert('urselogin', $userRecord);
