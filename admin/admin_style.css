@@ -1,0 +1,305 @@
+/* admin_style.css - admin v2 theme */
+:root {
+  --be: #f8f5f0;
+  --dark-brown: #4b1313; /* deep brown card */
+  --accent: #7a9b7a; /* muted green */
+  --muted: #d7ccc8;
+  --text: #2d2d2d;
+  --title: #f3e29a;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--be);
+  color: var(--text);
+}
+
+/* header */
+.akd-admin-header {
+  background: transparent;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+.akd-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+.akd-brand {
+  font-weight: 800;
+  color: var(--dark-brown);
+  font-size: 22px;
+}
+.akd-brand span {
+  letter-spacing: 2px;
+}
+.akd-nav a {
+  margin-left: 12px;
+  padding: 8px 14px;
+  border-radius: 22px;
+  text-decoration: none;
+  color: var(--dark-brown);
+  background: transparent;
+}
+.akd-nav a:hover {
+  background: rgba(112, 128, 96, 0.12);
+}
+
+/* main card style like your cart image: dark brown card */
+.akd-card {
+  max-width: 1100px;
+  margin: 28px auto;
+  background: var(--dark-brown);
+  color: var(--title);
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+.akd-card .akd-card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: var(--title);
+}
+
+/* inner white container for content */
+.akd-panel {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 16px;
+}
+
+/* page title above table */
+.page-title {
+  max-width: 1100px;
+  margin: 10px auto 6px auto;
+  padding: 0 16px;
+  font-size: 22px;
+  color: var(--dark-brown);
+  font-weight: 800;
+}
+
+/* table style */
+.table-wrap {
+  max-width: 1100px;
+  margin: 12px auto;
+  padding: 0 16px;
+}
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.04);
+}
+.styled-table thead tr {
+  background: var(--accent);
+  color: #fff;
+}
+.styled-table th,
+.styled-table td {
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  color: #222;
+}
+.styled-table tbody tr {
+  background: var(--be);
+}
+.styled-table tbody tr:nth-child(even) {
+  background: #fffaf7;
+}
+.styled-table tbody tr:hover {
+  background: #fff3e8;
+}
+
+/* buttons */
+.akd-btn {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+}
+.akd-btn-edit {
+  background: var(--accent);
+  color: #fff;
+}
+.akd-btn-delete {
+  background: #b94a48;
+  color: #fff;
+}
+.akd-btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* forms */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+input[type="text"],
+input[type="number"],
+select,
+textarea,
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+/* small helpers */
+.center {
+  text-align: center;
+}
+.small {
+  font-size: 13px;
+  color: #666;
+}
+
+/* responsive */
+@media (max-width: 800px) {
+  .akd-header-inner {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .akd-nav a {
+    margin-left: 6px;
+    padding: 6px 10px;
+  }
+  .page-title {
+    padding: 0 12px;
+  }
+  .table-wrap {
+    padding: 0 12px;
+  }
+}
+/* --- TÙY CHỈNH BẢNG FEEDBACK --- */
+
+/* Định dạng Sao */
+.rating-stars {
+  color: #ffc107;
+  font-size: 1.1em;
+  letter-spacing: 1px;
+}
+
+/* Định dạng Thẻ Trạng thái */
+.status-tag {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Màu cho trạng thái Mới (Dùng màu cảnh báo) */
+.status-new-tag {
+  background-color: #ffe0b2; /* Cam nhạt */
+  color: #e65100; /* Cam đậm */
+}
+
+/* Màu cho trạng thái Đã trả lời (Dùng màu thành công) */
+.status-replied-tag {
+  background-color: #c8e6c9; /* Xanh lá nhạt */
+  color: #2e7d32; /* Xanh lá đậm */
+}
+
+/* Định dạng Phản hồi (Admin Response) */
+.admin-response {
+  margin-top: 10px;
+  padding: 10px;
+  /* Dùng màu accent của theme cho viền */
+  border-left: 3px solid var(--accent);
+  background-color: #f7fcf7; /* Nền nhạt */
+  font-size: 0.9em;
+  line-height: 1.4;
+  color: var(--text);
+}
+.admin-response strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Định dạng các nút Thao tác */
+.actions-links a {
+  text-decoration: none;
+  margin-right: 8px;
+  font-weight: 600;
+}
+.actions-links .reply-btn {
+  color: var(--accent);
+}
+.actions-links .delete-btn {
+  color: #b94a48; /* Màu đỏ của akd-btn-delete */
+}
+/* Đảm bảo liên kết không bị gạch chân khi hover trên thanh menu */
+.akd-nav a[style*="font-weight: bold"] {
+  text-decoration: none !important;
+}
+/* ================================== */
+/* === STYLES CHO TRANG reply_feedback.php === */
+/* ================================== */
+.feedback-details {
+  background-color: var(--be); /* Màu be nhạt */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.feedback-details p {
+  margin-bottom: 8px;
+  line-height: 1.5;
+  color: var(--text);
+}
+.feedback-details strong {
+  color: var(--dark-brown); /* Màu nâu đậm cho các label */
+}
+.feedback-details h3 {
+  color: var(--dark-brown);
+  font-size: 1.5em;
+  margin-top: 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+}
+.feedback-details textarea {
+  min-height: 150px;
+}
+.akd-btn-back {
+  background: #6c757d; /* Xám */
+  color: #fff;
+  margin-left: 10px;
+}
+/* Message style */
+.message-success {
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: #e6f7e9; /* Xanh lá nhạt */
+  color: #38703d; /* Xanh lá đậm */
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+}
+.message-error {
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: #fcebeb; /* Đỏ nhạt */
+  color: #9f3a38; /* Đỏ đậm */
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+}

@@ -1,0 +1,81 @@
+/* === Giao diện nền tổng thể === */
+body {
+  background-color: #f6f2e9;
+  font-family: "Segoe UI", sans-serif;
+  color: #2c1a12;
+}
+/* === Bảng === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fcfcfa;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+/* === Tiêu đề bảng === */
+th {
+  background-color: #4e6c3a;
+  color: #fdf8f5;
+  text-align: left;
+  padding: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+/* === Nội dung bảng === */
+td {
+  padding: 12px;
+  border-top: 1px solid #ddd;
+  color: #2c1a12;
+  background-color: #fff;
+}
+/* === Hiệu ứng khi rê chuột === */
+tr:hover td {
+  background-color: #efe9d9;
+}
+/* === Tiêu đề trang === */
+h2 {
+  text-align: center;
+  color: #4b3b2b;
+  margin-bottom: 20px;
+}
+/* === Nút === */
+.btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 10px;
+  transition: 0.3s;
+}
+.btn-view,
+.btn-back {
+  background-color: #607d3b;
+}
+.btn-view:hover,
+.btn-back:hover {
+  background-color: #7ea94b;
+}
+/* === Trạng thái === */
+.status.pending {
+  color: #c99200;
+}
+.status.processing {
+  color: #3c91e6;
+}
+/* === Section === */
+.order-detail-section {
+  background-color: #e9d8c0;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-top: 20px;
+}
+.total {
+  text-align: right;
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #2c1a12; /* hoặc #4E6C3A tùy bạn thích tông nâu hay xanh rêu */
+}

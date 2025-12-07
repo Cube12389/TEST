@@ -1,0 +1,101 @@
+/* CSS CHUNG LOGIN & REGISTER (Đã chỉnh sửa) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* BACKGROUND & CĂN GIỮA FORM */
+body {
+  background: linear-gradient(135deg, #f9f4ef, #f0e68c); /* vàng nhạt dịu */
+  height: 100vh;
+  display: flex;
+  justify-content: center; /* Căn giữa ngang */
+  align-items: center; /* Căn giữa dọc */
+}
+
+/* Form container */
+.auth-container {
+  width: 380px;
+  background: #fff;
+  padding: 30px 25px;
+  border-radius: 12px;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.auth-container h2 {
+  text-align: center;
+  color: #701f1f; /* đỏ nâu */
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Input fields */
+.auth-container input {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.auth-container input:focus {
+  border-color: #3b6944; /* xanh rêu */
+  outline: none;
+  box-shadow: 0 0 6px rgba(59, 105, 68, 0.5);
+}
+
+/* Button */
+.auth-container button {
+  width: 100%;
+  padding: 12px;
+  background: #701f1f; /* đỏ nâu */
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.auth-container button:hover {
+  background: #3b6944; /* xanh rêu */
+}
+
+/* Link dưới form */
+.auth-container p {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #555;
+}
+
+.auth-container a {
+  color: #701f1f; /* Đổi màu link sang đỏ nâu để dễ nhìn hơn */
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.auth-container a:hover {
+  color: #ff5622; /* cam nổi bật */
+  text-decoration: underline;
+}
+
+/* Hiệu ứng fade in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

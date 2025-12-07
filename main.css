@@ -1,0 +1,602 @@
+/* ===============================
+   🌿 GIAO DIỆN TỔNG THỂ
+=================================*/
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f5efe6; /* Màu Be nhạt */
+  color: #2c2c2c; /* Màu chữ chính */
+}
+
+/* ===============================
+   🧭 HEADER
+=================================*/
+header {
+  background: #f5efe6; /* Màu nền Header nhạt */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header .container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Logo */
+.logo h1 {
+  margin: 0;
+  color: #3e2723; /* Màu Nâu đậm */
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.logo p {
+  color: #c9a66b; /* Màu Accent */
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* Menu */
+nav {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  /* Chỉnh màu chữ menu thành nâu đậm để nổi bật trên nền header nhạt */
+  color: #3e2723;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+}
+
+nav a:hover {
+  color: #5d4037; /* Màu Nâu */
+  background: rgba(85, 107, 47, 0.12);
+}
+
+/* Nút nổi bật */
+nav a[href*="cart"],
+nav a[href*="account"],
+nav a[href*="login"],
+nav a[href*="logout"],
+nav a[href*="register"] {
+  background: #556b2f; /* Màu Rêu Xanh */
+  color: #f5efe6; /* Màu chữ sáng trên nền nút */
+  border-radius: 20px;
+  padding: 8px 18px;
+}
+
+nav a[href*="cart"]:hover,
+nav a[href*="account"]:hover,
+nav a[href*="login"]:hover,
+nav a[href*="logout"]:hover,
+nav a[href*="register"]:hover {
+  background: #7a8b45; /* Màu Rêu Nhạt */
+}
+
+/* ===============================
+   🖼️ BANNER
+=================================*/
+#banner {
+  background: url(./ảnh/rau\ trộn.jpg) center/cover no-repeat;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 100px;
+  position: relative;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+#banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+#banner .box-left {
+  position: relative;
+  z-index: 2;
+  width: 50%;
+}
+
+#banner .box-left h2 {
+  font-size: 68px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+#banner .box-left p {
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+#banner .box-left button {
+  margin-top: 30px;
+  padding: 15px 35px;
+  background: #556b2f; /* Màu Rêu Xanh */
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#banner .box-left button:hover {
+  background: #7a8b45; /* Màu Rêu Nhạt */
+}
+
+/* ===============================
+   🛍️ SẢN PHẨM
+=================================*/
+#wp-products {
+  padding: 100px 80px;
+  text-align: center;
+}
+
+#wp-products h2 {
+  font-size: 42px;
+  color: #5d4037; /* Màu Nâu */
+  margin-bottom: 60px;
+}
+
+#list-products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+#list-products .item {
+  width: 320px;
+  background: #3e2723; /* Màu Nâu Đậm */
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+#list-products .item:hover {
+  transform: translateY(-5px);
+}
+
+#list-products .item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+#list-products .name {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+#list-products .desc {
+  color: #c7ecc6;
+  font-size: 16px;
+}
+
+#list-products .price {
+  color: #f0e68c;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 15px 0;
+}
+#list-products .item button[type="submit"] {
+  /* Màu nền bạn yêu cầu */
+  background-color: #701f1f;
+  /* Màu chữ bạn yêu cầu */
+  color: white;
+  /* Padding bạn yêu cầu */
+  padding: 10px;
+  /* Loại bỏ border */
+  border: none;
+  /* Góc bo tròn bạn yêu cầu */
+  border-radius: 5px;
+  /* Con trỏ */
+  cursor: pointer;
+}
+
+/* ===============================
+   🛒 GIỎ HÀNG - ĐÃ CHỈNH SỬA VÀ BỔ SUNG
+=================================*/
+.cart-container {
+  width: 90%;
+  max-width: 900px; /* Đặt max-width để trông đẹp hơn */
+  margin: 80px auto;
+  /* Đổi màu nền từ tối #3e2723 sang sáng #f5efe6 */
+  background: #f5efe6;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  /* Đổi màu chữ từ trắng sang màu tối */
+  color: #3e2723;
+}
+
+.cart-container h2 {
+  text-align: center;
+  color: #5d4037; /* Màu Nâu */
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+/* Thêm style cho hình ảnh trong bảng */
+.cart-table td img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.cart-table th,
+.cart-table td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.cart-table th {
+  background: #556b2f; /* Màu Rêu Xanh */
+  color: #f5efe6; /* Chữ sáng trên nền xanh */
+}
+
+/* Đảm bảo màu nền các dòng xen kẽ (dòng chẵn) trên nền sáng */
+.cart-table tr:nth-child(even) {
+  background: rgba(85, 107, 47, 0.05);
+}
+
+/* Styling cho Quantity controls */
+.quantity-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.qty-btn {
+  background: #556b2f;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: 0.3s;
+  font-weight: bold;
+  line-height: 1;
+}
+.qty-btn:hover {
+  background: #7a8b45;
+}
+.qty-input {
+  width: 50px;
+  text-align: center;
+  border: 1px solid #ccc;
+  margin: 0 5px;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.total {
+  text-align: right;
+  color: #3e2723; /* Màu Nâu Đậm cho tổng tiền */
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+/* Styling cho các nút hành động */
+.btn {
+  text-decoration: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 15px;
+  transition: 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-checkout {
+  background: #556b2f; /* Rêu Xanh */
+  color: #f5efe6; /* Be nhạt */
+}
+
+.btn-checkout:hover {
+  background: #7a8b45; /* Rêu Nhạt */
+}
+
+.btn-continue {
+  background: #c9a66b; /* Accent */
+  color: #3e2723; /* Nâu đậm */
+  margin-left: 10px;
+}
+.btn-continue:hover {
+  background: #b69255;
+}
+
+.btn-remove {
+  background: #d9534f; /* Đỏ cho remove */
+  color: #fff;
+  padding: 8px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: normal;
+  display: inline-block;
+  text-transform: none;
+}
+.btn-remove:hover {
+  background: #c9302c;
+}
+
+/* ===============================
+   🧍 LOGIN / REGISTER
+=================================*/
+.auth-container {
+  width: 380px;
+  margin: 100px auto;
+  background: #fff;
+  padding: 35px 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.auth-container h2 {
+  text-align: center;
+  color: #5d4037; /* Màu Nâu */
+}
+
+.auth-container input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.auth-container input:focus {
+  border-color: #556b2f; /* Màu Rêu Xanh */
+  outline: none;
+  box-shadow: 0 0 5px rgba(85, 107, 47, 0.4);
+}
+
+.auth-container button {
+  width: 100%;
+  padding: 12px;
+  background: #556b2f; /* Màu Rêu Xanh */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.auth-container button:hover {
+  background: #7a8b45; /* Màu Rêu Nhạt */
+}
+
+/* ===============================
+   📞 LIÊN HỆ
+=================================*/
+.contact-section {
+  padding: 80px 20px;
+  background: #556b2f; /* Màu Rêu Xanh */
+  color: #fff;
+  text-align: center;
+}
+
+.contact-section h2 {
+  color: #f0e68c;
+  font-size: 32px;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+}
+
+.contact-form button {
+  background: #f0e68c;
+  color: #3e2723; /* Màu Nâu Đậm */
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  background: #ffb84d;
+}
+
+/* ===============================
+   🦶 FOOTER
+=================================*/
+footer {
+  background: #3e2723; /* Màu Nâu Đậm */
+  color: #eee;
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 15px;
+  margin-top: 100px;
+}
+
+/* ===============================
+   📱 RESPONSIVE - KHẮC PHỤC TRÀN MÀN HÌNH
+=================================*/
+@media (max-width: 768px) {
+  header .container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  nav {
+    justify-content: center;
+  }
+
+  /* KHẮC PHỤC BANNER BỊ TRÀN */
+  #banner {
+    flex-direction: column;
+    height: auto;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  #banner .box-left {
+    width: 100%;
+  }
+
+  #banner .box-left h2 {
+    font-size: 42px;
+  }
+
+  #banner .box-left p {
+    font-size: 20px;
+  }
+
+  #wp-products {
+    padding: 60px 20px;
+  }
+
+  #list-products .item {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  /* Giỏ hàng responsive */
+  .cart-table,
+  .cart-table tbody,
+  .cart-table td,
+  .cart-table th,
+  .cart-table tr {
+    display: block;
+  }
+  .cart-table thead {
+    display: none; /* Ẩn header trên di động */
+  }
+  .cart-table tr {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  .cart-table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+    border: none;
+    border-bottom: 1px dotted #ccc;
+  }
+  .cart-table td:last-child {
+    border-bottom: none;
+  }
+  .cart-table td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 10px;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  /* Cần thêm data-label vào PHP/HTML cho responsive table hoạt động tốt */
+}
+/* --- Tông màu chủ đạo: Nâu (#5D4037), Be (#F7F3E3), Rêu (#4A7E64) --- */
+
+/* 1. Thiết lập chung cho các nút hành động trong .item */
+.item button {
+  display: block; /* Đảm bảo nút chiếm toàn bộ chiều rộng */
+  width: 100%;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* 2. Nút "Thêm vào giỏ hàng" (class: add-to-cart) - Màu Rêu */
+.item .add-to-cart {
+  /* Màu nền chính (Rêu đậm) */
+  background-color: #4a7e64;
+  /* Màu chữ (Trắng/Be nhạt) */
+  color: #f7f3e3;
+  box-shadow: 0 4px #3c6a53; /* Tạo độ sâu 3D */
+}
+
+.item .add-to-cart:hover {
+  background-color: #5b8f77; /* Rêu nhạt hơn khi di chuột */
+}
+
+.item .add-to-cart:active {
+  background-color: #3c6a53; /* Rêu đậm hơn khi nhấp */
+  transform: translateY(2px); /* Hiệu ứng nhấn nút */
+  box-shadow: 0 2px #3c6a53;
+}
+
+/* 3. Nút "Mua ngay" (Button type="submit" trong form) - Màu Nâu/Be */
+.item form button[type="submit"] {
+  /* Màu nền phụ (Nâu nhạt/Be) */
+  background-color: #e6d7b7;
+  /* Màu chữ (Nâu đậm) */
+  color: #5d4037;
+  border: 1px solid #c4b08a;
+  box-shadow: 0 4px #c4b08a; /* Tạo độ sâu 3D */
+}
+
+.item form button[type="submit"]:hover {
+  background-color: #f7f3e3; /* Be sáng hơn khi di chuột */
+}
+
+.item form button[type="submit"]:active {
+  background-color: #c4b08a; /* Nâu đậm hơn khi nhấp */
+  transform: translateY(2px); /* Hiệu ứng nhấn nút */
+  box-shadow: 0 2px #c4b08a;
+}
+
+/* Điều chỉnh lại khoảng cách nếu cần */
+.item form {
+  margin-top: -10px; /* Đẩy form lên sát nút giỏ hàng nếu cần */
+}

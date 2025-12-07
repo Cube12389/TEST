@@ -1,35 +1,48 @@
 <?php
+// 包含统一头部文件
+include 'header.php';
 
-$LoginHTML = 0;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username_or_email = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
+    $sql = "SELECT * FROM users WHERE username=? OR email=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $username_or_email, $username_or_email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+
+    if ($user && password_verify($password, $user['password'])) {
+        $_SESSION['username'] = $user['username'];
+        header("Location: index.php");
+        exit();
+    } else {
+        $error = "用户名或密码错误!";
+    }
+}
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <?php include "php/usuall/head.php"; ?>
-    <title>美林湖广附八00 - 登录</title>
-    <link rel="stylesheet" href="css/login.css">
+  <meta charset="UTF-8">
+  <title>登录</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="auth.css">
+
 </head>
 <body>
-
-<?php include "php/usuall/header.php";?>
-<main>
-    <div class="tell">
-        <h3 style="top: 10px; left: 10px">广告位招租</h3>
-    </div>
-    <div class="login" id="login">
-        <h3>登录</h3>
-        <p>用户名</p>
-        <input type="text" id="username" placeholder="请输入用户名">
-        <p>密码</p>
-        <input type="password" id="password" placeholder="请输入密码"><br><br>
-        <a href="reslogin.php">注册账号</a>
-        <button onclick="login();">登录</button>
-    </div>
-</main>
-
+  
+  <div class="auth-container">
+  <h2>🔑 登录</h2>
+  <?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?>
+  <form method="POST" action="">
+    <input type="text" name="username" placeholder="用户名或邮箱" required>
+    <input type="password" name="password" placeholder="密码" required>
+    <button type="submit">登录</button>
+  </form>
+  <p>您还没有账户？ <a href="register.php">立即注册</a></p>
+</div>
 </body>
-<script src="js/usuall/header.js"></script>
-<script src="js/login.js"></script>
 </html>
